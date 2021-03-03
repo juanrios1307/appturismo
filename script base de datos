@@ -1,0 +1,121 @@
+Create database AppTurismo;
+
+use AppTurismo;
+
+CREATE TABLE Usuarios (
+UserId int NOT NULL AUTO_INCREMENT, 
+Nombre varchar(255) NOT NULL, 
+Apellido varchar(255), 
+fechaDeNacimiento Date, 
+Correo varchar(100), 
+Telefono varchar(14), 
+password varchar(255), 
+PRIMARY KEY (UserId));
+
+CREATE TABLE Ambiente (
+AmbienteId int NOT NULL AUTO_INCREMENT,
+Nombre varchar(100),
+PRIMARY KEY (AmbienteId));
+
+CREATE TABLE Ciudad (
+CiudadId int NOT NULL AUTO_INCREMENT,
+Nombre varchar(100),
+PRIMARY KEY (CiudadId));
+
+CREATE TABLE Lugares (
+LugarId int NOT NULL AUTO_INCREMENT,  
+AdminId int NOT NULL, 
+Nombre varchar(255), 
+Correo varchar(255), 
+Telefono varchar(14), 
+AmbienteId int NOT NULL, 
+CiudadId int NOT NULL, 
+FechaSubidaId int NOT NULL,
+Longitud float(12), 
+Latitud float(12), 
+paginaWeb varchar(70), 
+PRIMARY KEY (LugarId), 
+FOREIGN KEY (AdminId) REFERENCES Usuarios (UserId));
+
+CREATE TABLE Fecha (
+FechaId int NOT NULL AUTO_INCREMENT,
+Fecha Date,
+PRIMARY KEY (FechaId));
+
+CREATE TABLE Calificaciones (
+CaliId int NOT NULL AUTO_INCREMENT,
+Lugar int NOT NULL,
+User int NOT NULL,
+Fecha int NOT NULL,
+Calificacion int(1), 
+Comentario varchar(250),
+PRIMARY KEY (CaliId),
+FOREIGN KEY (Lugar) REFERENCES Lugares (LugarId),
+FOREIGN KEY (User) REFERENCES Usuarios (UserId),
+FOREIGN KEY (Fecha) REFERENCES Fecha (FechaId));
+
+CREATE TABLE Reservas (
+ReservaId int NOT NULL AUTO_INCREMENT,
+Lugar int NOT NULL,
+User int NOT NULL,
+Fecha int NOT NULL,
+Valor int(20),
+Notas varchar(250),
+PRIMARY KEY (ReservaId),
+FOREIGN KEY (Lugar) REFERENCES Lugares (LugarId),
+FOREIGN KEY (User) REFERENCES Usuarios (UserId),
+FOREIGN KEY (Fecha) REFERENCES Fecha (FechaId));
+
+CREATE TABLE Imagenes (
+ImagenId int NOT NULL AUTO_INCREMENT, 
+Lugar int NOT NULL, 
+Imagen varchar(250), 
+PRIMARY KEY (ImagenId),
+FOREIGN KEY (Lugar) REFERENCES Lugares (LugarId));
+
+CREATE TABLE Hoteles (
+LugarId int NOT NULL,
+Estrellas int (1),
+PRIMARY KEY (LugarId));
+
+CREATE TABLE Restaurantes (
+LugarId int NOT NULL,
+menu varchar(250),
+PRIMARY KEY (LugarId));
+
+CREATE TABLE Parques (
+LugarId int NOT NULL,
+Descripcion varchar(250),
+PRIMARY KEY (LugarId));
+
+CREATE TABLE Teatros (
+LugarId int NOT NULL,
+Cartelera varchar(250),
+Capacidad int(6),
+PRIMARY KEY (LugarId));
+
+CREATE TABLE Eventos (
+LugarId int NOT NULL,
+Descripcion varchar(250),
+Capacidad int(6),
+PRIMARY KEY (LugarId));
+
+CREATE TABLE Monumentos (
+LugarId int NOT NULL,
+Historia varchar(250),
+Descripcion varchar(250),
+PRIMARY KEY (LugarId));
+
+CREATE TABLE Bares (
+LugarId int NOT NULL,
+Carta varchar(250),
+PRIMARY KEY (LugarId));
+
+CREATE TABLE Habitaciones (
+HabId int NOT NULL AUTO_INCREMENT,
+Hotel int NOT NULL,
+Tipo varchar(50),
+Valor int(10),
+Disponibilidad int(5),
+PRIMARY KEY (HabId),
+FOREIGN KEY (Hotel) REFERENCES Hoteles (LugarId));
