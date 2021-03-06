@@ -19,9 +19,13 @@ from django.urls import path
 from apps.Principal import views as vMain
 from apps.LogIn import views as vLogin
 
+from apps.Administrar import views as vAdmin
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',vMain.inicio,name="inicio"),
     path('login/',vLogin.login,name="login"),
-    path('registro/',vLogin.registro,name="registro")
+    path('registro/',vLogin.registro,name="registro"),
+    path('dashboard/',vAdmin.dashboard,name="dashboard")
+
 ]

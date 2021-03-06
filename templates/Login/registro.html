@@ -9,5 +9,17 @@
     {% include "navbar.html" %}
 
     <h1>Registro</h1>
+
+    {% if request %}
+
+     <form method="POST">{% csrf_token %}
+         {{ form }}
+         <input class='btn btn-primary' type="submit" value="Enviar" />
+
+     </form>
+
+    {% endif %}
+
+
 </body>
 </html>
