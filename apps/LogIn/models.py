@@ -5,11 +5,9 @@ from django.db import models
 class Usuario(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    fechaNacimiento=models.DateTimeField(auto_now_add=True, auto_now=False)
+    fechaNacimiento=models.DateTimeField()
     email = models.EmailField()
-    telefono= models.CharField(max_length=20)
+    telefono= models.IntegerField()
     password = models.CharField(max_length=100)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-    def __str__(self):
-        return self.email

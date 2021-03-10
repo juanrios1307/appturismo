@@ -6,7 +6,7 @@ from .models import Usuario
 
 
 class AdminRegistrado(admin.ModelAdmin):
-    list_display = ["email", "nombre", "password","timestamp"]
+    list_display = ["email","nombre","apellido","fechaNacimiento","telefono","password","timestamp"]
     form = RegForm
     # list_display_links = ["email"]
     list_filter = ["timestamp"]

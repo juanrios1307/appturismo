@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
+    #apps Terceros
+    'crispy_forms',
+    
     #mis apps
     'apps.Administrar',
     'apps.Busqueda',
@@ -64,6 +66,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'appturismo.urls'
+
 
 TEMPLATES = [
     {
