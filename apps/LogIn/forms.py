@@ -18,6 +18,10 @@ class RegForm(forms.ModelForm):
         nombre = self.cleaned_data.get("nombre")
         return nombre
 
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        return email
+
 
 class LoginForm(forms.ModelForm):
     class Meta:
@@ -27,6 +31,14 @@ class LoginForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(),
         }
+
+    def clean_password(self):
+        password = self.cleaned_data.get("password")
+        return password
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        return email
 
     def ok(self):
         return self

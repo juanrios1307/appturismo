@@ -15,8 +15,11 @@ def dashboard(request):
     loginMsg = request.session.get('loginMsg')
     loginBool = request.session.get('loginBool')
 
+    email = request.session.get('login')
+
     context = {
-        'context': "Hola"
+        'context': "Hola",
+        'email':email
     }
 
     if(registroBool == True):

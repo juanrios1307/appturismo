@@ -8,7 +8,11 @@
     
  {% include "navbar.html" %}
 
-
+    {% if not email == none  %}
+        <h1> Bienvenido : {{ email }}</h1>
+    {% else %}
+        <h1> Hola</h1>
+    {% endif %}
 
 
 </body>

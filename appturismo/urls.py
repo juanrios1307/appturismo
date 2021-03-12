@@ -16,16 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from apps.Principal import views as vMain
-from apps.LogIn import views as vLogin
-
 from apps.Administrar import views as vAdmin
+from apps.Busqueda import views as vBusqueda
+from apps.Chat import views as vChat
+from apps.Contacto import views as vContact
+from apps.LogIn import views as vLogin
+from apps.Lugar import views as vLugar
+from apps.Menu import views as vMenu
+from apps.Principal import views as vMain
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',vMain.inicio,name="inicio"),
     path('login/',vLogin.login,name="login"),
     path('registro/',vLogin.registro,name="registro"),
-    path('dashboard/',vAdmin.dashboard,name="dashboard")
-
+    path('dashboard/',vAdmin.dashboard,name="dashboard"),
+    path('logout/',vMain.cerrarSesion,name="logout"),
 ]

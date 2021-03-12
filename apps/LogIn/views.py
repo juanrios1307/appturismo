@@ -21,8 +21,8 @@ def login(request):
 
 
     if form.is_valid():
-        email = "juanesrios13@gmail.com"
-        password = "123456"
+        email = form.clean_email()
+        password = form.clean_password()
 
         with connection.cursor() as cursor:
             cursor.execute('SELECT id,email,password FROM LogIn_usuario WHERE email=%s AND password=%s',
@@ -34,6 +34,8 @@ def login(request):
             if(len(row) >= 1 ):
                 request.session['loginMsg'] = "Ingreso Exitoso"
                 request.session['loginBool'] = True
+
+                request.session['login']=email
 
                 return redirect('/dashboard/')
 
@@ -50,24 +52,28 @@ def login(request):
 
 def registro(request):
 
+    email = request.session.get('login')
 
-    titulo = "Registro"
-    form = RegForm(request.POST or None)
+    if email == None:
+        titulo = "Registro"
+        form = RegForm(request.POST or None)
 
-    context = {
-        "titulo": titulo,
-        "form": form,
-    }
+        context = {
+            "titulo": titulo,
+            "form": form,
+        }
 
-    if form.is_valid():
-        form.save()
+        if form.is_valid():
+            form.save()
 
 
-        request.session['registroMsg']="Registro Exitoso"
-        request.session['registroBool']=True
+            request.session['registroMsg']="Registro Exitoso"
+            request.session['registroBool']=True
+            request.session['login'] = form.clean_email()
 
+            return redirect('/dashboard/')
+    else:
         return redirect('/dashboard/')
-
 
     return render(request, "Login/registro.html",context)
 
